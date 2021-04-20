@@ -2,20 +2,20 @@
 {% block content %}
 
 <div class="card" class="m-5 p-2">
-    <h5 class="card-title">{{ city.fldName }}</h5>
+    <h5 class="card-title">{{ oscar.Index }} - {{ oscar.Year }}</h5>
 
+<div class="card" class="m-5 p-2">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{ city.fldLat }}</li>
-        <li class="list-group-item">{{ city.fldLong }}</li>
-        <li class="list-group-item">{{ city.fldCapitalStatus }}</li>
-        <li class="list-group-item">{{ city.fldCountry }}</li>
-        <li class="list-group-item">{{ city.fldPopulation }}</li>
+        <li class="list-group-item">Age: {{ oscar.Age }}</li>
+        <li class="list-group-item">Name: {{ oscar.Name }}</li>
+        <li class="list-group-item">Movie: {{ oscar.Movie }}</li>
     </ul>
     <div class="card-body">
-        <a href="/edit/{{city.id}}" class="card-link btn btn-primary">edit</a>
+        <a href="/edit/{{oscar.Index}}" class="card-link btn btn-primary">edit</a>
     </div>
 </div>
-<form action="/delete/{{city.id}}" method="post"><button type="submit" class="btn btn-danger">Delete</button></form>
+    <form action="/delete/{{oscar.Index}}" method="post"><button type="submit" class="btn btn-danger">Delete</button></form>
+
 
 
 {% endblock %}
