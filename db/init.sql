@@ -1,15 +1,15 @@
 CREATE DATABASE oscarData;
 use oscarData;
 
-CREATE TABLE IF NOT EXISTS tbloscarAgeMale (
-    `Index` INT,
-    `Year` INT,
-    `Age` INT,
-    `Name` VARCHAR(25) CHARACTER SET utf8,
-    `Movie` VARCHAR(40) CHARACTER SET utf8,
-    PRIMARY KEY ('Index')
+CREATE TABLE IF NOT EXISTS oscarAgeMale (
+    `id` INT,
+    `year` INT,
+    `age` INT,
+    `name` VARCHAR(25) CHARACTER SET utf8,
+    `movie` VARCHAR(40) CHARACTER SET utf8,
+    PRIMARY KEY (`id`)
 );
-INSERT INTO tbloscarAgeMale VALUES
+INSERT INTO oscarAgeMale VALUES
     (1,1928,44,' "Emil Jannings"',' "The Last Command The Way of All Flesh"'),
     (2,1929,41,' "Warner Baxter"',' "In Old Arizona"'),
     (3,1930,62,' "George Arliss"',' "Disraeli"'),

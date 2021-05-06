@@ -18,36 +18,36 @@ mysql.init_app(app)
 
 @app.route('/', methods=['GET'])
 def index():
-    user = {'username': 'Oscar Data'}
+    user = {'username': 'Oscars Project'}
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM oscarAgeMale')
     result = cursor.fetchall()
     return render_template('index.html', title='Home', user=user, cities=result)
 
 
-@app.route('/view/<int:Index>', methods=['GET'])
-def record_view(Index):
+@app.route('/view/<int:city_id>', methods=['GET'])
+def record_view(city_id):
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM oscarAgeMale WHERE id=%s', Index)
+    cursor.execute('SELECT * FROM oscarAgeMale WHERE id=%s', city_id)
     result = cursor.fetchall()
     return render_template('view.html', title='View Form', city=result[0])
 
 
-@app.route('/edit/<int:Index>', methods=['GET'])
-def form_edit_get(Index):
+@app.route('/edit/<int:city_id>', methods=['GET'])
+def form_edit_get(city_id):
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM oscarAgeMale WHERE id=%s', Index)
+    cursor.execute('SELECT * FROM oscarAgeMale WHERE id=%s', city_id)
     result = cursor.fetchall()
     return render_template('edit.html', title='Edit Form', city=result[0])
 
 
-@app.route('/edit/<int:Index>', methods=['POST'])
-def form_update_post(Index):
+@app.route('/edit/<int:city_id>', methods=['POST'])
+def form_update_post(city_id):
     cursor = mysql.get_db().cursor()
-    inputData = (request.form.get('Index'), request.form.get('Year'), request.form.get('Age'), request.form.get('Name'),
-                 request.form.get('Movie'), Index)
-    sql_update_query = """UPDATE oscarAgeMale t SET t.Index = %s, t.Year = %s, t.Age = %s, t.Name = %s, t.Movie = 
-    %s WHERE t.'Index' = %s """
+    inputData = (request.form.get('year'), request.form.get('age'), request.form.get('name'),
+                 request.form.get('movie'), city_id)
+    sql_update_query = """UPDATE oscarAgeMale t SET t.year = %s, t.age = %s, t.name = %s, t.movie = 
+    %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
@@ -61,19 +61,19 @@ def form_insert_get():
 @app.route('/cities/new', methods=['POST'])
 def form_insert_post():
     cursor = mysql.get_db().cursor()
-    inputData = (request.form.get('Index'), request.form.get('Year'), request.form.get('Age'),
-                 request.form.get('Name'), request.form.get('Movie'))
-    sql_insert_query = """INSERT INTO oscarAgeMale (Index,Year,Age,Name,Movie) VALUES (%s, %s,%s, %s,%s) """
+    inputData = (request.form.get('id'), request.form.get('year'), request.form.get('age'),
+                 request.form.get('name'), request.form.get('movie'))
+    sql_insert_query = """INSERT INTO oscarAgeMale (id,`year`,age,`name`,movie) VALUES (%s, %s,%s, %s,%s) """
     cursor.execute(sql_insert_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
 
 
-@app.route('/delete/<int:Index>', methods=['POST'])
-def form_delete_post(Index):
+@app.route('/delete/<int:city_id>', methods=['POST'])
+def form_delete_post(city_id):
     cursor = mysql.get_db().cursor()
-    sql_delete_query = """DELETE FROM oscarAgeMale WHERE Index = %s """
-    cursor.execute(sql_delete_query, Index)
+    sql_delete_query = """DELETE FROM oscarAgeMale WHERE id = %s """
+    cursor.execute(sql_delete_query, city_id)
     mysql.get_db().commit()
     return redirect("/", code=302)
 
@@ -88,10 +88,10 @@ def api_browse() -> str:
     return resp
 
 
-@app.route('/api/v1/oscar/<int:Index>', methods=['GET'])
-def api_retrieve(Index) -> str:
+@app.route('/api/v1/oscar/<int:city_id>', methods=['GET'])
+def api_retrieve(city_id) -> str:
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM oscarAgeMale WHERE Index=%s', Index)
+    cursor.execute('SELECT * FROM oscarAgeMale WHERE id=%s', city_id)
     result = cursor.fetchall()
     json_result = json.dumps(result);
     resp = Response(json_result, status=200, mimetype='application/json')
@@ -104,14 +104,14 @@ def api_add() -> str:
     return resp
 
 
-@app.route('/api/v1/oscar/<int:Index>', methods=['PUT'])
-def api_edit(Index) -> str:
+@app.route('/api/v1/oscar/<int:city_id>', methods=['PUT'])
+def api_edit(city_id) -> str:
     resp = Response(status=201, mimetype='application/json')
     return resp
 
 
-@app.route('/api/oscar/<int:Index>', methods=['DELETE'])
-def api_delete(Index) -> str:
+@app.route('/api/oscar/<int:city_id>', methods=['DELETE'])
+def api_delete(city_id) -> str:
     resp = Response(status=210, mimetype='application/json')
     return resp
 

@@ -1,32 +1,32 @@
 {% extends "layout.html" %}
 {% block content %}
-<form action="/oscars/new" method="POST">
+<form action="/cities/new" method="POST">
     <div class="row">
         <div class="col">
-            <label for="Index">Index</label>
-            <input id="Index" type="text" class="form-control" placeholder="Oscar Index" name="Index" value="{{oscar.Index}}">
+            <label for="id">ID</label>
+            <input id="id" type="text" class="form-control" placeholder="Oscar Id" name="id">
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <label for="Year">Year Awarded</label>
-            <input id="Year" type="text" class="form-control" placeholder="Year Awarded" name="Year" value="{{oscar.Year}}">
+            <label for="year">Year Awarded</label>
+            <input id="year" type="text" class="form-control" placeholder="Year Awarded" name="year">
         </div>
         <div class="col">
-            <label for="Age">Age Awarded</label>
-            <input id="Age" type="text" class="form-control" placeholder="Age Awarded" name="Age" value="{{oscar.Age}}">
+            <label for="age">Age Awarded</label>
+            <input id="age" type="text" class="form-control" placeholder="Age Awarded" name="age">
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <label for="Name">Name of Artist</label>
-            <input id="Name" type="text" class="form-control" placeholder="Name of Artist"
-                   name="Name" value="{{oscar.Name}}">
+            <label for="name">Name of Artist</label>
+            <input id="name" type="text" class="form-control" placeholder="Name of Artist"
+                   name="name">
         </div>
         <div class="col">
-            <label for="Movie">Name of the Movies</label>
-            <input id="Movie" type="text" class="form-control" placeholder="Name of the Movie" name="Movie" value="{{oscar.Movie}}">
+            <label for="movie">Name of the Movies</label>
+            <input id="movie" type="text" class="form-control" placeholder="Name of the Movie" name="movie">
         </div>
     </div>
     <button type="submit" class="btn btn-success">Success</button>
